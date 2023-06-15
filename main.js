@@ -14,12 +14,13 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    prom
+    let playerChoicePrompt = prompt("What move would you like to make? \nAvailable options: Rock | Paper | Scissors");
+
+    playerChoice = playerChoicePrompt.charAt(0).toUpperCase() + playerChoicePrompt.slice(1);
     return playerChoice;
 }
 
 function playRound(playerChoice, computerChoice) {
-    playerChoice = prompt("What move would you like to make?");
 
     /* Draw */
     if(playerChoice === "Rock" && computerChoice === "Rock" || playerChoice === "Paper" && computerChoice === "Paper" || playerChoice === "Scissors" && computerChoice === "Scissors") {
