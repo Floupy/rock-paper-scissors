@@ -14,6 +14,7 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
+    prom
     return playerChoice;
 }
 
