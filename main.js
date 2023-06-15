@@ -45,16 +45,31 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
+function announceGameWinner() {
+    if (playerScore > computerScore) {
+        return ("The player wins!");
+    } else if (playerScore < computerScore) {
+        return ("The computer wins!");
+    } else if (playerScore === computerScore) {
+        return ("It's a draw!")
+    }
+
+}
+
 function game() {
 
     for(let i = 0; i < gameRounds; i++) {
         getPlayerChoice();
         getComputerChoice();
         console.log(playRound(playerChoice, computerChoice));
+
         if(i === gameRounds - 1) {
             console.log(`Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${gameRounds - (playerScore + computerScore)}`);
+            console.log(announceGameWinner());
         }
+
     }
+
 }
 
 game();
