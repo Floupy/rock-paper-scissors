@@ -9,6 +9,7 @@ let gameRounds = parseInt(prompt("How many rounds do you want to play?", "5"));
 let currentRound = 0;
 let playerScore = 0;
 let computerScore = 0;
+let draws = 0;
 
 let buttons = document.querySelectorAll('.buttons');
 const button = document.querySelector('button');
@@ -16,16 +17,9 @@ const playRock = document.querySelector("#rock");
 const playPaper = document.querySelector('#paper');
 const playScissors = document.querySelector('#scissors');
 const results = document.querySelector('.results');
+const currentResult = document.querySelector('.currentResult');
 const clearButton = document.querySelector('.clear');
 const playButton = document.querySelector('.play-button');
-
-
-/*buttons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        return e.target.id;
-    })
-});*/
-
 
 
 
@@ -34,22 +28,6 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-
-function getPlayerChoice() {
-    // let playerChoicePrompt = prompt("What move would you like to make? \nAvailable options: Rock | Paper | Scissors");
-
-    /*playerChoice = playerChoicePrompt.charAt(0).toUpperCase() + playerChoicePrompt.slice(1);
-    return playerChoice;*/
-
-    console.log(playerChoice);
-    return playerChoice;
-}
-
-/*
-buttons.forEach((button) => {
-    button.addEventListener('click', getPlayerChoice);
-});
-*/
 
 playRock.addEventListener('click', () => {
     playerChoice = "rock";
@@ -67,7 +45,6 @@ playScissors.addEventListener('click', () => {
     playRound(playerChoice, computerChoice);
 
 });
-playButton.addEventListener('click', playRound);
 function playRound(playerChoice, computerChoice) {
     console.log(currentRound + ' ' + gameRounds + ' ' + computerScore + ' ' + playerScore);
     getComputerChoice();
@@ -78,9 +55,10 @@ function playRound(playerChoice, computerChoice) {
             playerChoice === "paper" && computerChoice === "Paper" ||
             playerChoice === "scissors" && computerChoice === "Scissors") {
             currentRound += 1;
+            draws++;
             // return (`Player choice: ${playerChoice}; \n Computer choice: ${computerChoice}; \n Result: Draw!`);
             results.textContent = `Player choice: ${playerChoice}; \n Computer choice: ${computerChoice}; \n Result: Draw!`;
-            console.log(gameRounds);
+            currentResult.textContent = `Current results: Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${draws}`;
 
         }
 
@@ -93,6 +71,7 @@ function playRound(playerChoice, computerChoice) {
             console.log(playerScore);
             // return (`Player choice: ${playerChoice}; \nComputer choice: ${computerChoice}; \n Result: Player Wins!`);
             results.textContent = `Player choice: ${playerChoice}; \n Computer choice: ${computerChoice}; \n Player Wins!`;
+            currentResult.textContent = `Current results: Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${draws}`;
 
         }
 
@@ -104,6 +83,7 @@ function playRound(playerChoice, computerChoice) {
             currentRound += 1;
             // return (`Player choice: ${playerChoice}; \nComputer choice: ${computerChoice}; \n Result: Computer Wins!`);
             results.textContent = `Player choice: ${playerChoice}; \n Computer choice: ${computerChoice}; \n Computer Wins!`;
+            currentResult.textContent = `Current results: Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${draws}`;
 
         }
         else {
@@ -112,18 +92,13 @@ function playRound(playerChoice, computerChoice) {
         }
 
 
-        if(currentRound === gameRounds) {
+        if(computerScore === 5 || playerScore === 5) {
             playRock.disabled = true;
             playScissors.disabled = true;
             playPaper.disabled = true;
-            results.textContent = announceGameWinner() + (`Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${gameRounds - (playerScore + computerScore)}`);
-            // results.textContent = announceGameWinner();
+            results.textContent = announceGameWinner() + (` Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${draws}`);
+
         }
-
-
-    // console.log(playerChoice + " " + computerChoice)
-    /* Draw */
-
 
 
 }
@@ -139,9 +114,6 @@ clearButton.addEventListener('click', () => {
     playPaper.disabled = false;
 })
 
-playButton.addEventListener('click', playRound);
-
-
 
 function announceGameWinner() {
     if (playerScore > computerScore) {
@@ -152,28 +124,3 @@ function announceGameWinner() {
         return ("It's a draw!")
     }
 }
-
-function game() {
-
-    playRound();
-
-    if(playerScore === 5) {
-        results.textContent = (`Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${gameRounds - (playerScore + computerScore)}`);
-        results.textContent = announceGameWinner();
-    }
-
-    /*for(let i = 0; i < gameRounds; i++) {
-        
-        getPlayerChoice();
-        getComputerChoice();
-        console.log(playRound(playerChoice, computerChoice));
-
-        if(i === gameRounds - 1) {
-            console.log(`Player wins: ${playerScore}; Computer wins: ${computerScore}; Draws: ${gameRounds - (playerScore + computerScore)}`);
-            console.log(announceGameWinner());
-        }
-    }*/
-}
-
-game();
-
