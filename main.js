@@ -1,5 +1,7 @@
 "use strict";
 
+// TODO overhaul the game logic, simplify code, make it more readable/compact
+
 const availableChoices = ["Rock", "Paper", "Scissors"];
 let computerChoice;
 let playerChoice;
